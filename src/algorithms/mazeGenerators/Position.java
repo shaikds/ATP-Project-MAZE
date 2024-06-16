@@ -10,11 +10,11 @@ public class Position {
     }
 
 
-    public int getColumnIndex() {
+    public int getColIdx() {
         return columnIndex;
     }
 
-    public int getRowIndex() {
+    public int getRowIdx() {
         return rowIndex;
     }
 
@@ -25,15 +25,23 @@ public class Position {
                 '}';
     }
 
+    /**
+     * Checking if a position is equal to another position.
+     *
+     * @param obj
+     * @return
+     */
+
     @Override
     public boolean equals(Object obj) {
+        // identical objects
+        if (obj == this) return true;
         // Null and Position class check
-        if (obj == null || !(obj instanceof Position other)) {
-            return false;
-        }
+        if (obj == null || !(obj.getClass() == this.getClass())) return false;
 
+        Position other = (Position) obj;
         // Indexes not equal check
-        if (other.getRowIndex() != rowIndex || other.getColumnIndex() != columnIndex) {
+        if (other.getRowIdx() != rowIndex || other.getColIdx() != columnIndex) {
             return false;
         }
 
