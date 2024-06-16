@@ -6,4 +6,3 @@
 * Use SOLID Principles
 * OOP Design
 * Tests to check the maze generators & solvers 
-![image](https://github.com/shaikds/ATP-Project-MAZE/assets/33999967/5d7bd9e2-5fc6-4952-808d-73a74fdcbb48)
