@@ -7,5 +7,14 @@
 * OOP Design
 * Tests to check the maze generators & solvers
 
+
+# PART B - ATP-MAZE 
+#### Key Functionallities:
+* Creation of servers - 1. Server for creating mazes 2. Server for solving mazes
+* Using thread-pool to handle the requests
+* Using decorator & strategy & singleton design patterns
+* Config file for deciding type of maze/solution creators
+
+
 This project has built for BGU university, during Advanced Programming Topic course.
 
