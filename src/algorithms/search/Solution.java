@@ -1,8 +1,9 @@
 package algorithms.search;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Solution {
+public class Solution implements Serializable {
     ArrayList<AState> path;
 
     // Constructor //
@@ -12,7 +13,7 @@ public class Solution {
 
     // Getter //
     public ArrayList<AState> getSolutionPath() {
-        return  path;
+        return path;
     }
 
 
@@ -29,5 +30,23 @@ public class Solution {
 
     public void setSolutionPath(ArrayList<AState> reversed) {
         this.path = reversed;
+    }
+
+    //???????//=.=
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) return true;
+        if (!(obj.getClass() == Solution.class)) return false;
+        Solution other = (Solution) obj;
+        // not same length
+        if (other.getSolutionPath().size() != path.size()) return false;
+
+        for (int i = 0; i < path.size(); i++) {
+            AState otherState = other.getSolutionPath().get(i);
+            AState thisState = path.get(i);
+            if (!otherState.equals(thisState)) return false;
+        }
+
+        return false;
     }
 }

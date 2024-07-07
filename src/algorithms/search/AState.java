@@ -1,10 +1,9 @@
 package algorithms.search;
 
-import algorithms.mazeGenerators.Position;
-
+import java.io.Serializable;
 import java.util.LinkedList;
 
-public abstract class AState {
+public abstract class AState implements Serializable {
     public enum mColor {WHITE, GRAY, BLACK}
 
 

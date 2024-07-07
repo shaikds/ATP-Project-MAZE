@@ -1,12 +1,14 @@
 package algorithms.mazeGenerators;
 
+import java.io.Serializable;
 import java.util.Random;
 
-public class Maze {
+public class Maze implements Serializable {
+    static int MAX = 127;
     private Position startPosition, goalPosition;
     private int[][] maze;
-    private final int rows;
-    private final int columns;
+    private int rows;
+    private int columns;
 
     // Constructor - Empty maze
     public Maze(int rows, int columns) {
@@ -14,7 +16,7 @@ public class Maze {
         if (rows <= 0 || columns <= 0) {
             // minimum is rows,columns = 2
             rows = 2;
-            columns =2;
+            columns = 2;
         }
 
         this.startPosition = new Position(0, 0);
@@ -110,7 +112,7 @@ public class Maze {
 
 
     /**
-     *  makes all maze cells to walls
+     * makes all maze cells to walls
      *
      * @param maze to transform all the cells to walls (1)
      */
@@ -126,11 +128,10 @@ public class Maze {
         if (row < 0 || row >= rows || column < 0 || column >= columns) // Not in bounds
             return false;
         // Wall ? its not valid path
-        if ( maze[row][column] == 1) return false;
+        if (maze[row][column] == 1) return false;
         // Valid path
         return true;
     }
-
 
 
     // Randomly select a side for the entry and exit points
@@ -140,7 +141,7 @@ public class Maze {
         Position goalPosition = null;
         Position startPosition = null;
         // Looping, to make sure startPosition and goalPosition are not equal. if it does, keep randomizing.
-        while((goalPosition == null && startPosition == null) || startPosition == goalPosition) {
+        while ((goalPosition == null && startPosition == null) || startPosition == goalPosition) {
             // Place entry point on the selected side
             switch (side) {
                 case 0: // Top side
@@ -181,4 +182,92 @@ public class Maze {
         maze.setGoalPosition(goalPosition);
     }
 
+
+    // PART B //
+    // ------ //
+
+    /**
+     * Constructor from byte[] to maze
+     */
+    public Maze(byte[] byteMaze) {
+        if (byteMaze == null) return; // Base case
+        // 1)get rows
+        // 2)get columns
+        int rows = byteMaze[5] + byteMaze[4];
+        int cols = byteMaze[6] + byteMaze[7];
+
+        // 3) get start position
+        // 4) get goal position
+        this.startPosition = new Position(byteMaze[0], byteMaze[1]);
+        this.goalPosition = new Position(byteMaze[2], byteMaze[3]);
+        if (rows == 0 && cols == 0) this.goalPosition = startPosition; // Edge case of maze sized 0
+
+        // Start initializing maze
+        this.maze = new int[rows][cols];
+        this.rows = rows;
+        this.columns = cols;
+
+        // dynamic index of bytes
+        int byteMazeIndex = 8;
+        // Initialize int[][] maze
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                // save value
+                maze[i][j] = byteMaze[byteMazeIndex];
+                // increment
+                byteMazeIndex++;
+            }
+
+        }
+    }
+
+    /**
+     * @return byte array representation of current Maze object.
+     */
+    public byte[] toByteArray() {
+        // initialize result var
+        byte[] result = new byte[this.rows * this.columns + 8];
+        int resIdx = 0;
+
+        // save location of start/goal positions
+        result[resIdx] = (byte) this.startPosition.getRowIdx();
+        resIdx++;
+        result[resIdx] = (byte) this.startPosition.getColIdx();
+        resIdx++;
+        result[resIdx] = (byte) this.goalPosition.getRowIdx();
+        resIdx++;
+        result[resIdx] = (byte) this.goalPosition.getColIdx();
+        resIdx++;
+
+        // take care of rows / columns
+        // If bigger, its 2 bytes. not 1
+        if (rows >= MAX) {
+            int byteRows = rows / MAX;
+            int byteRowsLeft = rows % MAX;
+            result[4] = (byte) byteRows;
+            result[5] = (byte) byteRowsLeft;
+        } else {
+            result[4] = (byte) rows;
+        }
+        if (columns >= MAX) {
+            int byteColumns = columns / MAX;
+            int byteColumnsLeft = columns % MAX;
+            result[6] = (byte) byteColumns;
+            result[7] = (byte) byteColumnsLeft;
+        } else {
+            result[6] = (byte) columns;
+        }
+
+        resIdx = 8;
+        // convert maze to byte
+        for (int i = 0; i < getRows(); i++) {
+            for (int j = 0; j < getColumns(); j++) {
+                result[resIdx] = (byte) maze[i][j];
+                resIdx++;
+            }
+        }
+
+
+        return result;
+    }
 }

@@ -1,7 +1,6 @@
 package algorithms.search;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public abstract class ASearchingAlgorithm implements ISearchingAlgorithm {
@@ -35,7 +34,6 @@ public abstract class ASearchingAlgorithm implements ISearchingAlgorithm {
         // add init state to result
         currState = domain.getInitialState();
         result.addToPath(currState);
-//        result.setSolutionPath (result.getSolutionPath());
         ArrayList<AState> reversed = new ArrayList<>();
         reversed = reverseList(result.getSolutionPath());
 

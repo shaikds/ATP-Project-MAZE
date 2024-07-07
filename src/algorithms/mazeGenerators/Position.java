@@ -1,8 +1,12 @@
 package algorithms.mazeGenerators;
 
-public class Position {
-    int rowIndex;
-    int columnIndex;
+import java.io.Serializable;
+
+public class Position implements Serializable {
+
+
+   private int rowIndex;
+   private int columnIndex;
 
     public Position(int startRow, int startColumn) {
         this.rowIndex = startRow;
@@ -18,6 +22,13 @@ public class Position {
         return rowIndex;
     }
 
+    public void setRowIndex(int rowIndex) {
+        this.rowIndex = rowIndex;
+    }
+
+    public void setColumnIndex(int columnIndex) {
+        this.columnIndex = columnIndex;
+    }
     @Override
     public String toString() {
         return "{" +
