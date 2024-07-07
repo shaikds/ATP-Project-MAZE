@@ -15,6 +15,6 @@
 * Using decorator & strategy & singleton design patterns
 * Config file for deciding type of maze/solution creators
 
-
+####
 This project has built for BGU university, during Advanced Programming Topic course.
 
