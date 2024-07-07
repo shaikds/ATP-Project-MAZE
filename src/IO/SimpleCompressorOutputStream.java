@@ -5,11 +5,11 @@ import java.io.OutputStream;
 
 public class SimpleCompressorOutputStream extends OutputStream {
 
-    private static int MAX = 255;
+    private static final int MAX = 255;
     private static int LAST_CHAR = 0;
 
     private int counter;
-    private OutputStream out;
+    private final OutputStream out;
 
     // Constructor
     public SimpleCompressorOutputStream(OutputStream out) {
