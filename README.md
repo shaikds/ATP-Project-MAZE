@@ -8,7 +8,7 @@
 * Tests to check the maze generators & solvers
 
 
-# PART B - ATP-MAZE 
+# PART B - ATP-MAZE (Other Branch)
 #### Key Functionallities:
 * Creation of servers - 1. Server for creating mazes 2. Server for solving mazes
 * Using thread-pool to handle the requests
