@@ -1,4 +1,4 @@
-# PART A - ATP-MAZE 
+# PART A - ATP-MAZE (Main Branch)
 #### Key Functionallities:
 * Creation of mazes - Empty, Simply, Custom, 3D. ( Using Prim's algorithm & DFS algorithm for 3D )
 * Maze solvers (DFS,BFS,Best Breadth Search)
